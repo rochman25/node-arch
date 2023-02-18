@@ -3,6 +3,7 @@ const createError = require('http-errors')
 const router = express.Router();
 const apiResponse = require('../util/api-response');
 const userRouter = require('./user');
+const validateToken = require('../middleware/JwtMiddleware');
 
 router.get('/', function(req, res, next) {
     try {
@@ -13,6 +14,7 @@ router.get('/', function(req, res, next) {
     }
 });
 
+router.use(validateToken);
 router.use('/users',userRouter);
 
 module.exports = router;
