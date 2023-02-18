@@ -28,7 +28,8 @@ async function thirdPartyValidation(token){
                 Authorization: `Bearer ${token}`
             }
         }
-        const response = await axios.get("http://localhost:8001/api/user/partner/get-profile-with-auth",config);
+        let url = process.env.AUTHORIZATION_URL;
+        const response = await axios.get(url,config);
         return {
             code: response.data.code,
             message: response.data.message
