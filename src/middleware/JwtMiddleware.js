@@ -4,11 +4,11 @@ const axios = require('axios')
 async function validateToken(req, res, next) {
     const authorization = req.headers.authorization;
     if (!authorization) {
-        next(createError(403, "No Authorization Header"));
+        return next(createError(403, "No Authorization Header"));
     }
     try {
         const token = authorization?.split("Bearer ")[1];
-        if(token === undefined) {
+        if(typeof token === "undefined") {
             return next(createError(403, "Invalid Token Format"));
         }
         let res = await thirdPartyValidation(token);
