@@ -20,4 +20,16 @@ router.get('/', async function(req, res, next) {
     }
 });
 
+router.get('/:id', async function(req, res, next) {
+    try {
+        const id = req.params.id
+        const service = new userService();
+        const data = await service.getUserById(id);
+        const response = apiResponse("detail user",200,"success",data);
+        res.send(response);
+    } catch (err) {
+        next(createError(err.name, err.message));
+    }
+});
+
 module.exports = router

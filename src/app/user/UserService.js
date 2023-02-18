@@ -10,6 +10,14 @@ class UserService {
             throw new Error(err.message);
         }
     }
+
+    async getUserById(id){
+        try{
+            return await this.userRepository.getUserById(id);
+        }catch(err){
+            throw new Error(err.message);
+        }
+    }
 }
 
 module.exports = UserService
