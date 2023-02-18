@@ -44,7 +44,7 @@ router.post('/store',async function(req, res, next){
         if(error){
             let message = "";
             if(typeof error.details !== "undefined"){
-                error.details.forEach(function(item, index, arr){
+                error.details.forEach(function(item){
                      message += item.message
                 });
             }
