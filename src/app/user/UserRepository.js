@@ -29,6 +29,21 @@ class UserRepository {
             throw new Error(err.original.message);
         }
     }
+
+    async createNewUSer(payload){
+        try{
+            const { first_name, last_name, email } = payload
+            return await db.User.create({
+                first_name,
+                last_name,
+                email,
+                created_at: new Date(),
+                updated_at: new Date()
+            });
+        }catch(err){
+            throw new Error(err.original.message);
+        }
+    }
 }
 
 module.exports = UserRepository;

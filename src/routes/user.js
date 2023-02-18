@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const express = require("express");
 const router = express.Router();
 const userService = require('../app/user/UserService');
+const userValidation = require('../app/user/UserValidation');
 
 router.get('/', async function(req, res, next) {
     try {
@@ -26,6 +27,34 @@ router.get('/:id', async function(req, res, next) {
         const service = new userService();
         const data = await service.getUserById(id);
         const response = apiResponse("detail user",200,"success",data);
+        res.send(response);
+    } catch (err) {
+        next(createError(err.name, err.message));
+    }
+});
+
+router.post('/store',async function(req, res, next){
+    try {
+        const payload = {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email
+        }
+        const {error} = userValidation.validate(payload);
+        if(error){
+            let message = "";
+            if(typeof error.details !== "undefined"){
+                error.details.forEach(function(item, index, arr){
+                     message += item.message
+                });
+            }
+            const response = apiResponse(message,422,"error",null);
+            res.status(422);
+            return res.send(response);
+        }
+        const service = new userService();
+        await service.createNewUser(payload);
+        const response = apiResponse("Success create new user",200,"success",null);
         res.send(response);
     } catch (err) {
         next(createError(err.name, err.message));
