@@ -17,7 +17,7 @@ This project is sample simple rest api build with NodeJS and Express.
 4. `npx sequelize-cli db:migrate`
 5. `npx sequelize-cli db:seed:all`
 6. `npm install`
-7. `npm run start`
+7. `npm run start-dev` for development
 
 
 Hope this help.

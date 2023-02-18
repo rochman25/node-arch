@@ -12,13 +12,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('Users', [{
-      first_name: 'John',
-      last_name: 'Doe',
-      email: 'example@example.com',
-      created_at: new Date(),
-      updated_at: new Date()
-    }]);
+    var users = [];
+    for (let i=0; i<100; i++){
+      let user = {
+        first_name: 'John',
+        last_name: 'Doe'+i,
+        email: `example${i}@example.com`,
+        created_at: new Date(),
+        updated_at: new Date()
+      };
+      users.push(user)
+    }
+    return queryInterface.bulkInsert('Users', users);
   },
 
   async down (queryInterface, Sequelize) {
