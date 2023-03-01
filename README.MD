@@ -8,6 +8,7 @@ This project is sample simple rest api build with NodeJS and Express.
 - **[Express](https://expressjs.com/)**
 - **[Sequelize](https://sequelize.org/)**
 - **[Mysql2](https://www.npmjs.com/package/mysql2)**
+- **[Jest] (https://jestjs.io/)**
 
 ## How To Run
 
